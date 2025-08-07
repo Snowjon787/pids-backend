@@ -23,6 +23,7 @@ import csv
 from io import BytesIO
 from fastapi import APIRouter
 from typing import List
+from typing import List, Dict
 from datetime import datetime, timedelta
 
 
