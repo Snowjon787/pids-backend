@@ -802,7 +802,7 @@ def view_supervisors():
     return load_supervisors()
 
 @app.post("/edit_supervisors")
-def edit_supervisors(data: list[SupervisorItem]):
+def edit_supervisors(data: list[SupervisorItem] = Body(...)):
     try:
         data_dicts = [item.dict() for item in data]
         save_supervisors(data_dicts)
@@ -824,14 +824,13 @@ def view_npv():
     return load_npv()
 
 @app.post("/edit_npv")
-def edit_npv(data: list[NPVItem]):
+def edit_npv(data: list[NPVItem] = Body(...)):
     try:
         data_dicts = [item.dict() for item in data]
         save_npv(data_dicts)
         return {"status": "updated"}
     except Exception as e:
         return {"status": "error", "detail": str(e)}
-
 
 def save_npv(data):
     with open(NPV_FILE, 'w') as f:
@@ -855,5 +854,6 @@ def ping():
 @app.get("/")
 def root():
     return {"message": "✅ PIDS Alert Backend is Running"}
+
 
 
