@@ -1,0 +1,44 @@
+[
+  {
+    "start_ch": 0.0,
+    "end_ch": 100.0,
+    "group_name": "Group1",
+    "chat_id": "-1001111111111"
+  },
+  {
+    "start_ch": 100.01,
+    "end_ch": 200.0,
+    "group_name": "Group2",
+    "chat_id": "-1002222222222"
+  },
+  {
+    "start_ch": 200.01,
+    "end_ch": 300.0,
+    "group_name": "Group3",
+    "chat_id": "-1003333333333"
+  },
+  {
+    "start_ch": 300.01,
+    "end_ch": 400.0,
+    "group_name": "Group4",
+    "chat_id": "-1004444444444"
+  },
+  {
+    "start_ch": 400.01,
+    "end_ch": 500.0,
+    "group_name": "Group5",
+    "chat_id": "-1005555555555"
+  },
+  {
+    "start_ch": 500.01,
+    "end_ch": 600.0,
+    "group_name": "Group6",
+    "chat_id": "-1006666666666"
+  },
+  {
+    "start_ch": 600.01,
+    "end_ch": 700.0,
+    "group_name": "Group7",
+    "chat_id": "-1007777777777"
+  }
+]

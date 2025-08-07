@@ -1,0 +1,17 @@
+[
+  {
+    "start_ch": 285.0,
+    "end_ch": 330.0,
+    "npv": "NPV-1"
+  },
+  {
+    "start_ch": 330.0,
+    "end_ch": 380.0,
+    "npv": "NPV-2"
+  },
+  {
+    "start_ch": 380.0,
+    "end_ch": 443.33,
+    "npv": "NPV-3"
+  }
+]
