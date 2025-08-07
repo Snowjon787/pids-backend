@@ -1,0 +1,51 @@
+[
+  {
+    "start_ch": 285.0,
+    "end_ch": 326.0,
+    "group_name": "Group1",
+    "chat_id": "-1001111111111",
+    "time_window": "day"
+  },
+  {
+    "start_ch": 326.0,
+    "end_ch": 367.0,
+    "group_name": "Group2",
+    "chat_id": "-1002222222222",
+    "time_window": "day"
+  },
+  {
+    "start_ch": 367.0,
+    "end_ch": 405.0,
+    "group_name": "Group3",
+    "chat_id": "-1003333333333",
+    "time_window": "day"
+  },
+  {
+    "start_ch": 405.0,
+    "end_ch": 444.0,
+    "group_name": "Group4",
+    "chat_id": "-1004444444444",
+    "time_window": "day"
+  },
+  {
+    "start_ch": 285.0,
+    "end_ch": 340.0,
+    "group_name": "Group5",
+    "chat_id": "-1005555555555",
+    "time_window": "night"
+  },
+  {
+    "start_ch": 340.0,
+    "end_ch": 388.0,
+    "group_name": "Group6",
+    "chat_id": "-1006666666666",
+    "time_window": "night"
+  },
+  {
+    "start_ch": 388.0,
+    "end_ch": 444.0,
+    "group_name": "Group7",
+    "chat_id": "-1007777777777",
+    "time_window": "night"
+  }
+]

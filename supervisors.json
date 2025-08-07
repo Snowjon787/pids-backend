@@ -1,0 +1,22 @@
+[
+  {
+    "start_ch": 285.0,
+    "end_ch": 326.0,
+    "supervisor": "Amit Sharma"
+  },
+  {
+    "start_ch": 326.0,
+    "end_ch": 367.0,
+    "supervisor": "Bhavna Patel"
+  },
+  {
+    "start_ch": 367.0,
+    "end_ch": 405.0,
+    "supervisor": "Deepak Mehta"
+  },
+  {
+    "start_ch": 405,
+    "end_ch": 443.33,
+    "supervisor": "Suman Roy"
+  }
+]
