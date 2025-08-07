@@ -251,7 +251,6 @@ def get_sections():
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
-
 class AlertPayload(BaseModel):
     od: float
     ch: float
@@ -777,4 +776,5 @@ def ping():
 @app.get("/")
 def root():
     return {"message": "✅ PIDS Alert Backend is Running"}
+
 
