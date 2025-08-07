@@ -374,6 +374,12 @@ def get_chat_id_by_ch_and_time(ch):
         except Exception as e:
             print(f"⚠️ Error in group mapping parsing: {entry} → {e}")
     return None
+    
+def is_in_time_range(start: dtime, end: dtime, now: dtime):
+      if start <= end:
+        return start <= now <= end
+      else:
+        return now >= start or now <= end  # For overnight range like 18:45 to 06:00
 
 @app.post("/send_alert")
 def send_alert(payload: AlertPayload):
@@ -387,12 +393,6 @@ def send_alert(payload: AlertPayload):
     od = payload.od
     supervisor = ""
     npv = ""
-
-    def is_in_time_range(start: dtime, end: dtime, now: dtime):
-      if start <= end:
-        return start <= now <= end
-      else:
-        return now >= start or now <= end  # For overnight range like 18:45 to 06:00
 
     # Time ranges
     morning_start = dtime(6, 0)
@@ -983,4 +983,5 @@ def ping():
 @app.get("/")
 def root():
     return {"message": "✅ PIDS Alert Backend is Running"}
+
 
