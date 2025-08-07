@@ -152,13 +152,10 @@ def refresh_linewalkers():
 linewalker_data = load_linewalkers()
 
 # ========== Section Data ==========
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 def load_section_data():
     section_data = {}
     try:
-        csv_path = os.path.join(BASE_DIR, "OD_CH_Master.csv")  # ✅ safer
-        df_master = pd.read_csv(csv_path)
+        df_master = pd.read_csv("OD_CH_Master.csv")
         df_master = df_master.dropna(subset=["Section", "OD", "CH", "Diff"])
 
         for section in df_master["Section"].unique():
@@ -170,7 +167,6 @@ def load_section_data():
         print(f"❌ Error loading OD_CH_Master.csv: {e}")
 
     return section_data
-
 
 # ========== Interpolation ==========
 def interpolate_ch(df, od):
@@ -247,10 +243,14 @@ def convert_ch_to_od(section: str, ch: float):
         return {"error": "CH out of range."}
     return {"od": od}
 
-@app.get("/reload_sections")
-def reload_sections():
-    section_data = load_section_data()
-    return {"status": "reloaded", "sections": list(section_data.keys())}
+@app.get("/get_sections")
+def get_sections():
+    try:
+        section_data = load_section_data()
+        return list(section_data.keys())
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
 
 class AlertPayload(BaseModel):
     od: float
@@ -777,5 +777,4 @@ def ping():
 @app.get("/")
 def root():
     return {"message": "✅ PIDS Alert Backend is Running"}
-
 
