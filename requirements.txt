@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+pandas
+matplotlib
+requests
+pydantic
+pydantic-settings
+python-multipart
+openpyxl
+pytz
+sqlalchemy>=2.0
+psycopg[binary]
