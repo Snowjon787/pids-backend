@@ -5,17 +5,44 @@ services:
     plan: free
     autoDeploy: true
     dockerfilePath: ./Dockerfile
+
     envVars:
+      # ---- Core ----
       - key: DATABASE_URL
         fromDatabase:
           name: pids-postgres
           property: connectionString
-      - key: PYTHONUNBUFFERED
-        value: "1"
-      - key: API_KEY
-        value: "Yj@mb51"
       - key: PORT
         value: "10000"
+      - key: PYTHONUNBUFFERED
+        value: "1"
+
+      # ---- Admin/API auth (matches backend code) ----
+      - key: API_KEY_PIDS
+        value: "Yj@zpmbdb"            # header: X-API-KEY
+
+      # ---- CORS (locked for safety; Tkinter won't use CORS anyway) ----
+      - key: ALLOWED_ORIGINS
+        value: https://pids-backend.onrender.com
+
+      # ---- Telegram webhook hardening ----
+      - key: TG_WEBHOOK_SECRET
+        value: "long_random_string"  # replace with a strong secret (>=64 chars)
+      - key: PUBLIC_WEBHOOK_URL
+        value: "https://pids-backend.onrender.com/webhook"
+
+      # ---- Optional allowlists (recommended) ----
+      # Comma-separated. Keep quotes if using negative IDs.
+      - key: ALLOWED_CHAT_IDS
+        value: ""                    # e.g. "-1001111111111,-1002222222222"
+      - key: ALLOWED_USER_IDS
+        value: ""                    # e.g. "12345678,987654321"
+
+      # ---- Media + rate limit tuning (optional) ----
+      - key: MAX_MEDIA_BYTES
+        value: "10485760"             # 5 MiB. For 10 MiB use 10485760
+      # - key: RATE_LIMIT_STORAGE_URI
+      #   value: "rediss://default:PASS@HOST:PORT/0"  # Upstash/Redis if you add it
 
       # ---- Seeding toggle ----
       - key: SEED_ON_START
@@ -24,7 +51,6 @@ services:
       # ---- From settings.json ----
       - key: SEED_BOT_TOKEN
         value: "123456:ABC-BotTokenHere"
-      # (Optional) Keep these here if you ever want to use them in code
       - key: SEED_ALERT_SOUND
         value: "true"
       - key: SEED_TIMEOUT
