@@ -10,3 +10,5 @@ openpyxl
 pytz
 sqlalchemy>=2.0
 psycopg[binary]
+pillow
+slowapi
