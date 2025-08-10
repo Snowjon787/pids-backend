@@ -34,7 +34,7 @@ services:
       # ---- Optional allowlists (recommended) ----
       # Comma-separated. Keep quotes if using negative IDs.
       - key: ALLOWED_CHAT_IDS
-        value: ""                    # e.g. "-1001111111111,-1002222222222"
+        value: "-4832290037,-4873858885,-4853569789,-4901728134,-4927807764,-4909439914,-4975573108" # e.g. "-1001111111111,-1002222222222"
       - key: ALLOWED_USER_IDS
         value: ""                    # e.g. "12345678,987654321"
 
