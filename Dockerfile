@@ -40,9 +40,9 @@ USER appuser
 # ---- Expose port for Render ----
 EXPOSE 10000
 
-# ---- Healthcheck (Render respects it) ----
+# ---- Healthcheck ----
 HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
-  CMD curl -fsS http://127.0.0.1:${PORT}/ping || exit 1
+  CMD curl -fsS "http://127.0.0.1:${PORT}/ping" || exit 1
 
-# ---- Start (Render overrides CMD if you set one in dashboard) ----
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "${PORT}", "--proxy-headers", "--forwarded-allow-ips", "*", "--workers", "${UVICORN_WORKERS}"]
+# ---- Start (shell form so env vars expand) ----
+CMD sh -c 'uvicorn main:app --host 0.0.0.0 --port ${PORT:-10000} --proxy-headers --forwarded-allow-ips "*" --workers ${UVICORN_WORKERS:-1}'
