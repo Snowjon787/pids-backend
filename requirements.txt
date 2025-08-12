@@ -10,9 +10,9 @@ openpyxl
 pytz
 sqlalchemy>=2.0
 psycopg[binary]
-pillow
 slowapi
-pyclamd>=1.0.2
+pyclamd
 pillow>=9.0.0
 python-multipart>=0.0.5
+
 
