@@ -27,7 +27,7 @@ services:
 
       # ---- Telegram webhook hardening ----
       - key: TG_WEBHOOK_SECRET
-        value: "Yj@zisr15#9910570928%ziso3&zpmbdb^o4tenrev*o4nm&ziso6$zmmuser%mmbe"  # replace with a strong secret (>=64 chars)
+        value: "mA9vRr2Uda4X8uT3_QyVxL0tWcZmOqNkF9b7sJeKpD1gHf6z"  # replace with a strong secret (>=64 chars)
       - key: PUBLIC_WEBHOOK_URL
         value: "https://pids-backend.onrender.com/webhook"
 
@@ -156,5 +156,6 @@ services:
 databases:
   - name: pids-postgres
     plan: free
+
 
 
