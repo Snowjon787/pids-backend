@@ -20,7 +20,7 @@ services:
       - key: API_KEY_PIDS
         value: "Yj@zisr15"
       - key: CLIENT_ID
-        value: "pids1"
+        value: "hpclkrs36"
       - key: HMAC_SECRET
         value: "Gf7yQm8WxPz9Hk1Lr3nVb4Cs5Jt2Yd6Uq8p0Rm1Xv4s9Tz3Bv5c6Lp7Nd8Qf1Wg3"
 
@@ -64,7 +64,7 @@ services:
       - key: SEED_TIMEOUT
         value: "10"
       - key: SEED_CLIENT_ID
-        value: "pids1"
+        value: "hpclkrs36"
 
       # ---- From group_mapping.json ----
       - key: SEED_GROUP_MAPPINGS_JSON
@@ -89,3 +89,4 @@ services:
 databases:
   - name: pids-postgres
     plan: free
+
