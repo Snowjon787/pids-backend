@@ -427,22 +427,28 @@ ensure_schema()
 # ==============================
 from cryptography.fernet import Fernet, InvalidToken
 
+# replace the APP_FERNET_KEY block with this
 APP_FERNET_KEY = os.getenv("APP_FERNET_KEY", "")
 if not APP_FERNET_KEY:
-    raise RuntimeError(
-        "APP_FERNET_KEY env var required. Generate with:\\n"
-        "python -c \\\"from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())\\\""
-    )
+    raise RuntimeError("APP_FERNET_KEY env var required")
+
+def _normalize_fernet_key(k: str) -> str:
+    k = k.strip()
+    # if someone pasted str(Fernet.generate_key()) -> "b'....'"
+    if (k.startswith("b'") and k.endswith("'")) or (k.startswith('b"') and k.endswith('"')):
+        k = k[2:-1]
+    # add missing base64 padding if trimmed
+    missing = (-len(k)) % 4
+    if missing:
+        k += "=" * missing
+    return k
 
 try:
-    FERNET = Fernet(APP_FERNET_KEY.encode() if not isinstance(APP_FERNET_KEY, bytes) else APP_FERNET_KEY)
+    key_str = _normalize_fernet_key(APP_FERNET_KEY)
+    FERNET = Fernet(key_str.encode())
 except Exception as e:
     raise RuntimeError("APP_FERNET_KEY invalid. Must be URL-safe base64 32-byte key.") from e
 
-def enc_bytes(b: Optional[bytes]) -> Optional[bytes]:
-    if b is None:
-        return None
-    return FERNET.encrypt(b)
 
 def dec_bytes(b: Optional[bytes]) -> Optional[bytes]:
     if b is None:
