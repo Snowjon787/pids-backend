@@ -66,27 +66,106 @@ services:
       - key: SEED_CLIENT_ID
         value: "hpclkrs36"
 
-      # ---- From group_mapping.json ----
+     # ---- From group_mapping.json ----
       - key: SEED_GROUP_MAPPINGS_JSON
         value: |
-          [ ... your group mappings here ... ]
+          [
+            {
+              "start_ch": 285.0,
+              "end_ch": 326.0,
+              "group_name": "Group1",
+              "chat_id": "-1001111111111",
+              "time_window": "day"
+            },
+            {
+              "start_ch": 326.0,
+              "end_ch": 367.0,
+              "group_name": "Group2",
+              "chat_id": "-1002222222222",
+              "time_window": "day"
+            },
+            {
+              "start_ch": 367.0,
+              "end_ch": 405.0,
+              "group_name": "Group3",
+              "chat_id": "-1003333333333",
+              "time_window": "day"
+            },
+            {
+              "start_ch": 405.0,
+              "end_ch": 444.0,
+              "group_name": "Group4",
+              "chat_id": "-1004444444444",
+              "time_window": "day"
+            },
+            {
+              "start_ch": 285.0,
+              "end_ch": 340.0,
+              "group_name": "Group5",
+              "chat_id": "-1005555555555",
+              "time_window": "night"
+            },
+            {
+              "start_ch": 340.0,
+              "end_ch": 388.0,
+              "group_name": "Group6",
+              "chat_id": "-1006666666666",
+              "time_window": "night"
+            },
+            {
+              "start_ch": 388.0,
+              "end_ch": 444.0,
+              "group_name": "Group7",
+              "chat_id": "-1007777777777",
+              "time_window": "night"
+            }
+          ]
 
       # ---- From linewalkers.json ----
       - key: SEED_LINEWALKERS_JSON
         value: |
-          [ ... your linewalker mappings here ... ]
+          [
+            { "start_ch": 285.0, "end_ch": 297.0, "line_walker": "" },
+            { "start_ch": 297.0, "end_ch": 311.0, "line_walker": ""},
+            { "start_ch": 311.0, "end_ch": 318.0, "line_walker": ""},
+            { "start_ch": 318.0, "end_ch": 325.0, "line_walker": "" },
+            { "start_ch": 325.0, "end_ch": 333.0, "line_walker": ""},
+            { "start_ch": 333.0, "end_ch": 340.0, "line_walker": "" },
+            { "start_ch": 340.0, "end_ch": 354.0, "line_walker": ""},
+            { "start_ch": 354.0, "end_ch": 367.0, "line_walker": "" },
+            { "start_ch": 367.0, "end_ch": 377.0, "line_walker": "" },
+            { "start_ch": 377.0, "end_ch": 385.0, "line_walker": "" },
+            { "start_ch": 385.0, "end_ch": 393.0, "line_walker": ""},
+            { "start_ch": 393.0, "end_ch": 405.0, "line_walker": "" },
+            { "start_ch": 405.0, "end_ch": 415.0, "line_walker": "" },
+            { "start_ch": 415.0, "end_ch": 423.0, "line_walker": "" },
+            { "start_ch": 423.0, "end_ch": 429.0, "line_walker": ""},
+            { "start_ch": 429.0, "end_ch": 436.0, "line_walker": "" },
+            { "start_ch": 436.0, "end_ch": 444.0, "line_walker": ""}
+          ]
 
       # ---- From supervisors.json ----
       - key: SEED_SUPERVISORS_JSON
         value: |
-          [ ... your supervisor mappings here ... ]
+          [
+            { "start_ch": 285.0, "end_ch": 326.0, "supervisor": "" },
+            { "start_ch": 326.0, "end_ch": 367.0, "supervisor": "" },
+            { "start_ch": 367.0, "end_ch": 405.0, "supervisor": "" },
+            { "start_ch": 405,   "end_ch": 443.33, "supervisor": "" }
+          ]
 
       # ---- From npv.json ----
       - key: SEED_NPV_JSON
         value: |
-          [ ... your npv mappings here ... ]
+          [
+            { "start_ch": 285.0, "end_ch": 340.0, "npv": "NPV-1" },
+            { "start_ch": 340.0, "end_ch": 388.0, "npv": "NPV-2" },
+            { "start_ch": 388.0, "end_ch": 443.33, "npv": "NPV-3" }
+          ]
+
 
 databases:
   - name: pids-postgres
     plan: free
+
 
