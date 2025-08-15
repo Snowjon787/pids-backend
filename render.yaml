@@ -21,12 +21,20 @@ services:
       - key: API_KEY_PIDS
         value: "Yj@zpmbdb"            # header: X-API-KEY
 
+      # Fernet encryption key (REQUIRED by backend)
+      - key: APP_FERNET_KEY
+        value: "CHANGE_ME_FERNET_KEY"
+
+      # Optional: unlock secret for /admin/unlock
+      - key: APP_UNLOCK_SECRET
+        value: "CHANGE_ME_UNLOCK_SECRET"
+
       # ---- CORS (locked for safety; Tkinter won't use CORS anyway) ----
       - key: ALLOWED_ORIGINS
         value: https://pids-backend.onrender.com
 
       # ---- Telegram webhook hardening ----
-      - key: TG_WEBHOOK_SECRET
+      - key: TELEGRAM_WEBHOOK_SECRET
         value: "mA9vRr2Uda4X8uT3_QyVxL0tWcZmOqNkF9b7sJeKpD1gHf6z"  # replace with a strong secret (>=64 chars)
       - key: PUBLIC_WEBHOOK_URL
         value: "https://pids-backend.onrender.com/webhook"
@@ -40,7 +48,7 @@ services:
 
       # ---- Media + rate limit tuning (optional) ----
       - key: MAX_MEDIA_BYTES
-        value: "10485760"             # 5 MiB. For 10 MiB use 10485760
+        value: "10485760"             # 10 MiB
       # - key: RATE_LIMIT_STORAGE_URI
       #   value: "rediss://default:PASS@HOST:PORT/0"  # Upstash/Redis if you add it
 
@@ -156,6 +164,8 @@ services:
 databases:
   - name: pids-postgres
     plan: free
+
+
 
 
 
