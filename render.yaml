@@ -19,15 +19,15 @@ services:
 
       # ---- Admin/API auth (matches backend code) ----
       - key: API_KEY_PIDS
-        value: "Yj@zpmbdb"            # header: X-API-KEY
+        value: "Yj@zisr15"            # header: X-API-KEY
 
       # Fernet encryption key (REQUIRED by backend)
       - key: APP_FERNET_KEY
-        value: "CHANGE_ME_FERNET_KEY"
+        value: "Yj@o4tenrev"
 
       # Optional: unlock secret for /admin/unlock
       - key: APP_UNLOCK_SECRET
-        value: "CHANGE_ME_UNLOCK_SECRET"
+        value: "hpcl@krsziso3"
 
       # ---- CORS (locked for safety; Tkinter won't use CORS anyway) ----
       - key: ALLOWED_ORIGINS
@@ -35,7 +35,7 @@ services:
 
       # ---- Telegram webhook hardening ----
       - key: TELEGRAM_WEBHOOK_SECRET
-        value: "mA9vRr2Uda4X8uT3_QyVxL0tWcZmOqNkF9b7sJeKpD1gHf6z"  # replace with a strong secret (>=64 chars)
+        value: "mA9vRr2Uda4X8uT3_QyVxK0tWlZbOqNkF9b7sJeKpD1gHf6z"  # replace with a strong secret (>=64 chars)
       - key: PUBLIC_WEBHOOK_URL
         value: "https://pids-backend.onrender.com/webhook"
 
@@ -164,6 +164,7 @@ services:
 databases:
   - name: pids-postgres
     plan: free
+
 
 
 
