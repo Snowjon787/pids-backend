@@ -14,7 +14,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     TZ=Asia/Kolkata \
     PYTHONPATH=/app \
     # let CMD be re-targetable without editing the Dockerfile
-    MODULE_NAME=PIDSight_backend_clean \
+    MODULE_NAME=main \
     APP_NAME=app
 
 WORKDIR /app
