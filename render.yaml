@@ -23,7 +23,8 @@ services:
 
       # Fernet encryption key (REQUIRED by backend)
       - key: APP_FERNET_KEY
-        value: "Yj@o4tenrev"
+        value: "mJp8S0W4lY0bH2qvKpYqQfT0N0Jxv0y0Tg6a6FZc2p6k=
+"
 
       # Optional: unlock secret for /admin/unlock
       - key: APP_UNLOCK_SECRET
@@ -164,6 +165,7 @@ services:
 databases:
   - name: pids-postgres
     plan: free
+
 
 
 
