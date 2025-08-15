@@ -19,6 +19,10 @@ services:
       # ---- Admin/API auth (matches backend code) ----
       - key: API_KEY_PIDS
         value: "Yj@zisr15"
+      - key: CLIENT_ID
+        value: "pids1"
+      - key: HMAC_SECRET
+        value: "Gf7yQm8WxPz9Hk1Lr3nVb4Cs5Jt2Yd6Uq8p0Rm1Xv4s9Tz3Bv5c6Lp7Nd8Qf1Wg3"
 
       # Fernet encryption key (REQUIRED by backend)
       - key: APP_FERNET_KEY
@@ -47,8 +51,6 @@ services:
       # ---- Media + rate limit tuning (optional) ----
       - key: MAX_MEDIA_BYTES
         value: "10485760"
-      # - key: RATE_LIMIT_STORAGE_URI
-      #   value: "rediss://default:PASS@HOST:PORT/0"
 
       # ---- Seeding toggle ----
       - key: SEED_ON_START
@@ -61,61 +63,28 @@ services:
         value: "true"
       - key: SEED_TIMEOUT
         value: "10"
+      - key: SEED_CLIENT_ID
+        value: "pids1"
 
       # ---- From group_mapping.json ----
       - key: SEED_GROUP_MAPPINGS_JSON
         value: |
-          [
-            { "start_ch": 285.0, "end_ch": 326.0, "group_name": "Group1", "chat_id": "-1001111111111", "time_window": "day" },
-            { "start_ch": 326.0, "end_ch": 367.0, "group_name": "Group2", "chat_id": "-1002222222222", "time_window": "day" },
-            { "start_ch": 367.0, "end_ch": 405.0, "group_name": "Group3", "chat_id": "-1003333333333", "time_window": "day" },
-            { "start_ch": 405.0, "end_ch": 444.0, "group_name": "Group4", "chat_id": "-1004444444444", "time_window": "day" },
-            { "start_ch": 285.0, "end_ch": 340.0, "group_name": "Group5", "chat_id": "-1005555555555", "time_window": "night" },
-            { "start_ch": 340.0, "end_ch": 388.0, "group_name": "Group6", "chat_id": "-1006666666666", "time_window": "night" },
-            { "start_ch": 388.0, "end_ch": 444.0, "group_name": "Group7", "chat_id": "-1007777777777", "time_window": "night" }
-          ]
+          [ ... your group mappings here ... ]
 
       # ---- From linewalkers.json ----
       - key: SEED_LINEWALKERS_JSON
         value: |
-          [
-            { "start_ch": 285.0, "end_ch": 297.0, "line_walker": "" },
-            { "start_ch": 297.0, "end_ch": 311.0, "line_walker": "" },
-            { "start_ch": 311.0, "end_ch": 318.0, "line_walker": "" },
-            { "start_ch": 318.0, "end_ch": 325.0, "line_walker": "" },
-            { "start_ch": 325.0, "end_ch": 333.0, "line_walker": "" },
-            { "start_ch": 333.0, "end_ch": 340.0, "line_walker": "" },
-            { "start_ch": 340.0, "end_ch": 354.0, "line_walker": "" },
-            { "start_ch": 354.0, "end_ch": 367.0, "line_walker": "" },
-            { "start_ch": 367.0, "end_ch": 377.0, "line_walker": "" },
-            { "start_ch": 377.0, "end_ch": 385.0, "line_walker": "" },
-            { "start_ch": 385.0, "end_ch": 393.0, "line_walker": "" },
-            { "start_ch": 393.0, "end_ch": 405.0, "line_walker": "" },
-            { "start_ch": 405.0, "end_ch": 415.0, "line_walker": "" },
-            { "start_ch": 415.0, "end_ch": 423.0, "line_walker": "" },
-            { "start_ch": 423.0, "end_ch": 429.0, "line_walker": "" },
-            { "start_ch": 429.0, "end_ch": 436.0, "line_walker": "" },
-            { "start_ch": 436.0, "end_ch": 444.0, "line_walker": "" }
-          ]
+          [ ... your linewalker mappings here ... ]
 
       # ---- From supervisors.json ----
       - key: SEED_SUPERVISORS_JSON
         value: |
-          [
-            { "start_ch": 285.0, "end_ch": 326.0, "supervisor": "" },
-            { "start_ch": 326.0, "end_ch": 367.0, "supervisor": "" },
-            { "start_ch": 367.0, "end_ch": 405.0, "supervisor": "" },
-            { "start_ch": 405.0, "end_ch": 443.33, "supervisor": "" }
-          ]
+          [ ... your supervisor mappings here ... ]
 
       # ---- From npv.json ----
       - key: SEED_NPV_JSON
         value: |
-          [
-            { "start_ch": 285.0, "end_ch": 340.0, "npv": "NPV-1" },
-            { "start_ch": 340.0, "end_ch": 388.0, "npv": "NPV-2" },
-            { "start_ch": 388.0, "end_ch": 443.33, "npv": "NPV-3" }
-          ]
+          [ ... your npv mappings here ... ]
 
 databases:
   - name: pids-postgres
