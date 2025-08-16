@@ -6,57 +6,62 @@ services:
     autoDeploy: true
     dockerfilePath: ./Dockerfile
     envVars:
-      # ---- Core ----
-      - key: DATABASE_URL
+      # ========= Required =========
+      - key: DATABASE_URL          # required: DB connection
         fromDatabase:
           name: pids-postgres
           property: connectionString
-      - key: PORT
+      - key: PORT                  # required by Render to bind
         value: "10000"
-      - key: PYTHONUNBUFFERED
-        value: "1"
-
-      # ---- Admin/API auth (matches backend code) ----
-      - key: API_KEY_PIDS
+      - key: API_KEY_PIDS          # required: primary API key
         value: "Yj@zisr15"
-      - key: CLIENT_ID
+      - key: APP_FERNET_KEY        # required: Fernet key (44-char)
+        value: "Eo1NB3HmFdAXILZ_f0-f-DHDv7yli6OwvYm9KfhfjM8="
+      - key: TELEGRAM_WEBHOOK_SECRET # required: webhook HMAC gate
+        value: "mA9vRr2Uda4X8uT3_QyVxK0tWlZbOqNkF9b7sJeKpD1gHf6z"
+
+      # ========= Required for signed-frontend workflow =========
+      - key: CLIENT_ID             # required for HMAC-signed requests used by your frontend
         value: "hpclkrs36"
-      - key: HMAC_SECRET
+      - key: HMAC_SECRET           # required for HMAC signing
         value: "Gf7yQm8WxPz9Hk1Lr3nVb4Cs5Jt2Yd6Uq8p0Rm1Xv4s9Tz3Bv5c6Lp7Nd8Qf1Wg3"
 
-      # Fernet encryption key (REQUIRED by backend)
-      - key: APP_FERNET_KEY
-        value: "Eo1NB3HmFdAXILZ_f0-f-DHDv7yli6OwvYm9KfhfjM8="
 
-      # Optional: unlock secret for /admin/unlock
-      - key: APP_UNLOCK_SECRET
-        value: "hpcl@krsziso3"
-
-      # ---- CORS ----
-      - key: ALLOWED_ORIGINS
-        value: "https://pids-backend.onrender.com"
-
-      # ---- Telegram webhook hardening ----
-      - key: TELEGRAM_WEBHOOK_SECRET
-        value: "mA9vRr2Uda4X8uT3_QyVxK0tWlZbOqNkF9b7sJeKpD1gHf6z"
-      - key: PUBLIC_WEBHOOK_URL
-        value: "https://pids-backend.onrender.com/webhook"
-
-      # ---- Optional allowlists (recommended) ----
+    # ---- Optional allowlists (recommended) ----
       - key: ALLOWED_CHAT_IDS
         value: "-4832290037,-4873858885,-4853569789,-4901728134,-4927807764,-4909439914,-4975573108"
       - key: ALLOWED_USER_IDS
         value: ""
 
-      # ---- Media + rate limit tuning (optional) ----
+      # ========= Recommended =========
+      - key: ALLOWED_ORIGINS       # tighten CORS
+        value: "https://pids-backend.onrender.com"
+      - key: ENABLE_RATELIMIT
+        value: "1"
+      - key: RATE_LIMIT_STORAGE_URI
+        value: "memory://"
+      - key: APP_UNLOCK_SECRET
+        value: "hpcl@krsziso3"
+
+      # ========= Optional (behavior tuning) =========
       - key: MAX_MEDIA_BYTES
         value: "10485760"
+      - key: MAX_CSV_BYTES
+        value: "10485760"
+      - key: SESSION_TTL_HOURS
+        value: "720"
+      - key: REFRESH_TTL_DAYS
+        value: "60"
+      - key: SESSION_REFRESH_HINT_SECONDS
+        value: "900"
+      - key: SESSION_FORCE_REFRESH_SECONDS
+        value: "300"
+      - key: APP_SEAL_MODE
+        value: "0"
 
-      # ---- Seeding toggle ----
+      # ========= Seeding =========
       - key: SEED_ON_START
         value: "1"
-
-      # ---- From settings.json ----
       - key: SEED_BOT_TOKEN
         value: "123456:ABC-BotTokenHere"
       - key: SEED_ALERT_SOUND
@@ -66,95 +71,49 @@ services:
       - key: SEED_CLIENT_ID
         value: "hpclkrs36"
 
-     # ---- From group_mapping.json ----
       - key: SEED_GROUP_MAPPINGS_JSON
         value: |
           [
-            {
-              "start_ch": 285.0,
-              "end_ch": 326.0,
-              "group_name": "Group1",
-              "chat_id": "-1001111111111",
-              "time_window": "day"
-            },
-            {
-              "start_ch": 326.0,
-              "end_ch": 367.0,
-              "group_name": "Group2",
-              "chat_id": "-1002222222222",
-              "time_window": "day"
-            },
-            {
-              "start_ch": 367.0,
-              "end_ch": 405.0,
-              "group_name": "Group3",
-              "chat_id": "-1003333333333",
-              "time_window": "day"
-            },
-            {
-              "start_ch": 405.0,
-              "end_ch": 444.0,
-              "group_name": "Group4",
-              "chat_id": "-1004444444444",
-              "time_window": "day"
-            },
-            {
-              "start_ch": 285.0,
-              "end_ch": 340.0,
-              "group_name": "Group5",
-              "chat_id": "-1005555555555",
-              "time_window": "night"
-            },
-            {
-              "start_ch": 340.0,
-              "end_ch": 388.0,
-              "group_name": "Group6",
-              "chat_id": "-1006666666666",
-              "time_window": "night"
-            },
-            {
-              "start_ch": 388.0,
-              "end_ch": 444.0,
-              "group_name": "Group7",
-              "chat_id": "-1007777777777",
-              "time_window": "night"
-            }
+            { "start_ch": 285.0, "end_ch": 326.0, "group_name": "Group1", "chat_id": "-1001111111111", "time_window": "day" },
+            { "start_ch": 326.0, "end_ch": 367.0, "group_name": "Group2", "chat_id": "-1002222222222", "time_window": "day" },
+            { "start_ch": 367.0, "end_ch": 405.0, "group_name": "Group3", "chat_id": "-1003333333333", "time_window": "day" },
+            { "start_ch": 405.0, "end_ch": 444.0, "group_name": "Group4", "chat_id": "-1004444444444", "time_window": "day" },
+            { "start_ch": 285.0, "end_ch": 340.0, "group_name": "Group5", "chat_id": "-1005555555555", "time_window": "night" },
+            { "start_ch": 340.0, "end_ch": 388.0, "group_name": "Group6", "chat_id": "-1006666666666", "time_window": "night" },
+            { "start_ch": 388.0, "end_ch": 444.0, "group_name": "Group7", "chat_id": "-1007777777777", "time_window": "night" }
           ]
 
-      # ---- From linewalkers.json ----
       - key: SEED_LINEWALKERS_JSON
         value: |
           [
             { "start_ch": 285.0, "end_ch": 297.0, "line_walker": "" },
-            { "start_ch": 297.0, "end_ch": 311.0, "line_walker": ""},
-            { "start_ch": 311.0, "end_ch": 318.0, "line_walker": ""},
+            { "start_ch": 297.0, "end_ch": 311.0, "line_walker": "" },
+            { "start_ch": 311.0, "end_ch": 318.0, "line_walker": "" },
             { "start_ch": 318.0, "end_ch": 325.0, "line_walker": "" },
-            { "start_ch": 325.0, "end_ch": 333.0, "line_walker": ""},
+            { "start_ch": 325.0, "end_ch": 333.0, "line_walker": "" },
             { "start_ch": 333.0, "end_ch": 340.0, "line_walker": "" },
-            { "start_ch": 340.0, "end_ch": 354.0, "line_walker": ""},
+            { "start_ch": 340.0, "end_ch": 354.0, "line_walker": "" },
             { "start_ch": 354.0, "end_ch": 367.0, "line_walker": "" },
             { "start_ch": 367.0, "end_ch": 377.0, "line_walker": "" },
             { "start_ch": 377.0, "end_ch": 385.0, "line_walker": "" },
-            { "start_ch": 385.0, "end_ch": 393.0, "line_walker": ""},
+            { "start_ch": 385.0, "end_ch": 393.0, "line_walker": "" },
             { "start_ch": 393.0, "end_ch": 405.0, "line_walker": "" },
             { "start_ch": 405.0, "end_ch": 415.0, "line_walker": "" },
             { "start_ch": 415.0, "end_ch": 423.0, "line_walker": "" },
-            { "start_ch": 423.0, "end_ch": 429.0, "line_walker": ""},
+            { "start_ch": 423.0, "end_ch": 429.0, "line_walker": "" },
             { "start_ch": 429.0, "end_ch": 436.0, "line_walker": "" },
-            { "start_ch": 436.0, "end_ch": 444.0, "line_walker": ""}
+            { "start_ch": 436.0, "end_ch": 444.0, "line_walker": "" }
           ]
 
-      # ---- From supervisors.json ----
       - key: SEED_SUPERVISORS_JSON
         value: |
           [
             { "start_ch": 285.0, "end_ch": 326.0, "supervisor": "" },
             { "start_ch": 326.0, "end_ch": 367.0, "supervisor": "" },
             { "start_ch": 367.0, "end_ch": 405.0, "supervisor": "" },
-            { "start_ch": 405,   "end_ch": 443.33, "supervisor": "" }
+            { "start_ch": 405.0, "end_ch": 443.33, "supervisor": "" }
           ]
 
-      # ---- From npv.json ----
       - key: SEED_NPV_JSON
         value: |
           [
@@ -163,9 +122,6 @@ services:
             { "start_ch": 388.0, "end_ch": 443.33, "npv": "NPV-3" }
           ]
 
-
 databases:
   - name: pids-postgres
     plan: free
-
-
